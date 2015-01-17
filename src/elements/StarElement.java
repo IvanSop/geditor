@@ -1,0 +1,37 @@
+package elements;
+
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Paint;
+import java.awt.Stroke;
+import java.awt.geom.Point2D;
+
+import painters.StarPainter;
+
+public class StarElement extends DiagramDevice {
+
+	public StarElement(Point2D position, Dimension size, Stroke stroke, Paint paint,Color strokeColor) {
+		super(position, size, stroke, paint,strokeColor);
+		
+		elementPainter = new StarPainter(this); //zzz
+		
+
+	}
+
+	
+	public static DiagramDevice createDefault(Point2D pos, int elemNo){
+		Point2D position = (Point2D) pos.clone();
+		
+        Paint fill = Color.WHITE;
+	    StarElement or=new StarElement(position, 
+	    		                   new Dimension(50,50),
+	    		                   new BasicStroke((float)(2), BasicStroke.CAP_SQUARE,BasicStroke.JOIN_BEVEL ),
+	    		                   fill,
+	    		                   Color.BLACK);
+        or.setName("Star " + elemNo);
+		return or;
+	}
+
+}
