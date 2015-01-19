@@ -42,6 +42,8 @@ public class Toolbar extends JToolBar {
 		
 		add(ActionManager.getAction().getUndoAction());
 		add(ActionManager.getAction().getRedoAction());
+		add(ActionManager.getAction().getRotate90CounterClockwiseAction());
+		add(ActionManager.getAction().getRotate90ClockwiseAction());
 		add(ActionManager.getAction().getTrashAction());
 		add(ActionManager.getAction().getDeleteAction());
 		addSeparator();

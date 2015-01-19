@@ -88,11 +88,7 @@ public class DiagramModel implements Serializable {
 	}		
 	
 	
-	public void removeLink(DiagramElement link){
-		
-		diagramElements.remove(link);
-		fireUpdatePerformed();
-	}	
+
 	public static int getCount() {
 		return count;
 	}

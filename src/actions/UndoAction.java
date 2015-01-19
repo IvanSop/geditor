@@ -1,5 +1,8 @@
 package actions;
 
+import gui.Frame;
+import gui.InternalFrame;
+
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -22,5 +25,7 @@ public class UndoAction extends AbstractAction {
 
     public void actionPerformed(ActionEvent e) {
         System.out.println("Action [" + e.getActionCommand() + "] performed!");
+    	InternalFrame view=(InternalFrame) Frame.getInstance().getDesk().getSelectedFrame();
+		view.getCommandManager().undoCommand();
     }
 }

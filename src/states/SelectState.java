@@ -31,13 +31,13 @@ public class SelectState extends State{
 		if (e.getButton()==MouseEvent.BUTTON1){
 
 			handleInMotion = med.getDeviceAndHandleForPoint(position);
-			if(handleInMotion == null){
-				if(!e.isControlDown()){
-					med.getDiagram().getSelectionModel().removeAllFromSelectionList();
-					Frame.getInstance().getStatusBar().setDim("//");
-					Frame.getInstance().getStatusBar().setElType("//");
-					Frame.getInstance().getStatusBar().setElName("//");
-					Frame.getInstance().getStatusBar().setPos("//");
+				if(handleInMotion == null){
+					if(!e.isControlDown()){
+						med.getDiagram().getSelectionModel().removeAllFromSelectionList();
+						Frame.getInstance().getStatusBar().setDim("//");
+						Frame.getInstance().getStatusBar().setElType("//");
+						Frame.getInstance().getStatusBar().setElName("//");
+						Frame.getInstance().getStatusBar().setPos("//");
 				}
 
 
@@ -54,8 +54,7 @@ public class SelectState extends State{
 						med.getDiagram().getSelectionModel().removeFromSelectionList(element);
 					}else{
 						med.getDiagram().getSelectionModel().addToSelectionList(element);
-						// sad ode mozda za statusbar
-						//System.out.println(dev.getPosition().getX());
+						
 						if(med.getDiagram().getSelectionModel().getSelectionListSize()==1) {
 							Frame.getInstance().getStatusBar().setDim("W:" + dev.getSize().width + " - H:" + dev.getSize().height);
 							Frame.getInstance().getStatusBar().setElType(dev.getClass().getSimpleName());
@@ -75,6 +74,13 @@ public class SelectState extends State{
 
 				}
 			} else {
+				DiagramDevice dev = null;
+				if(med.getDiagram().getSelectionModel().getSelectionListSize()>1) {
+					dev = (DiagramDevice)((InternalFrame)Frame.getInstance().getDesk().getSelectedFrame()).getDiagram().getSelectionModel().getSelectionList().get(0);
+					med.getDiagram().getSelectionModel().removeAllFromSelectionList();
+					med.getDiagram().getSelectionModel().addToSelectionList(dev);
+					
+				}
 				med.startResizeState();
 			}
 		}
@@ -95,6 +101,9 @@ public class SelectState extends State{
 			}
 
 		}
+		
+		// **-*--*--*-*--*-*-*-*-------------------***********
+	
 	}
 
 	public void mouseMoved(MouseEvent e) {
@@ -118,13 +127,34 @@ public class SelectState extends State{
 				elementInMotion = med.getDiagram().getModel().getElementAtPosition(position);
 				if(elementInMotion != -1){
 					//selektovan je element ili grupa elemenata
-					//preci u MoveState
+					med.startMoveState();
 					System.out.println("start move state --");//med.startMoveState();
 					return;
 
 
 				}else	//nije pogodjen element, prelazimo u Laso stanje
 					med.startLassoState();	
+			}
+		}
+		
+		if (mouseButton == MouseEvent.BUTTON3) {
+			Point position = e.getPoint();
+			med.transformToUserSpace(position);
+			handleInMotion = med.getDeviceAndHandleForPoint(position);
+			if(handleInMotion != null){
+				;
+			}else{
+				//nije selektovan handle, da li je selektovan element
+				elementInMotion = med.getDiagram().getModel().getElementAtPosition(position);
+				if(elementInMotion != -1){
+					//selektovan je element ili grupa elemenata
+					med.startMoveState();
+					System.out.println("start move state --");//med.startMoveState();
+					return;
+
+
+				}else	//nije pogodjen element, prelazimo u Laso stanje
+					System.out.println("aa");//med.startLassoState();	
 			}
 		}
 

@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 
+import commands.AddDeviceCommand;
+
 import tree.Diagram;
 import elements.DiagramDevice;
 import elements.StarElement;
@@ -49,9 +51,8 @@ public class StarState extends State{
 		Point position = e.getPoint();
 		med. transformToUserSpace(position);
 		if (e.getButton()==MouseEvent.BUTTON1){
-			 if (med.getDiagram().getModel().getDeviceAtPosition(position)==-1){
-				 DiagramDevice device = StarElement.createDefault(position,med.getDiagram().getModel().getDeviceCount());
-				 med.getDiagram().getModel().addDiagramElements(device);
+			if (med.getDiagram().getModel().getElementAtPosition(position)==-1){
+				 med.getCommandManager().addCommand(new AddDeviceCommand(med.getDiagram().getModel(),med.getDiagram().getSelectionModel(),position,InternalFrame.STAR));
 			 }
 			
 			

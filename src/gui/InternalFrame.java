@@ -31,6 +31,9 @@ import listeners.IFrameListener;
 import painters.ElementPainter;
 import states.StateManager;
 import tree.Diagram;
+
+import commands.CommandManager;
+
 import elements.DiagramDevice;
 import elements.DiagramElement;
 import event.UpdateEvent;
@@ -52,7 +55,7 @@ public class InternalFrame extends JInternalFrame implements UpdateListener,Adju
 	private int hScrollValue=1490;
 	private int vScrollValue=1490;
 	
-	
+	private CommandManager commandManager=new CommandManager();
 	
 	private StateManager stateManager=new StateManager(this);
 	
@@ -66,13 +69,48 @@ public class InternalFrame extends JInternalFrame implements UpdateListener,Adju
 	final static double translateFactor = 10;
 	final static double scalingFactor = 1.2;
 	
-	
+	public static final int RECTANGLE = 1;
+	public static final int CIRCLE = 2;
+	public static final int TRIANGLE = 3;
+	public static final int STAR = 4;
 	
 	private AffineTransform transformation = new AffineTransform();
 	
 	
 	
+	
+	
+	public CommandManager getCommandManager() {
+		return commandManager;
+	}
+
+	public double getTranslateX() {
+		return translateX;
+	}
+
+	public void setTranslateX(double translateX) {
+		this.translateX = translateX;
+	}
+
+	public double getTranslateY() {
+		return translateY;
+	}
+
+	public void setTranslateY(double translateY) {
+		this.translateY = translateY;
+	}
+
+	public double getScaling() {
+		return scaling;
+	}
+
+	public void setScaling(double scaling) {
+		this.scaling = scaling;
+	}
+	
+	
 	// -- state manager
+	
 	
 	public void startCircleState() {
 		stateManager.setCircleState();
@@ -104,6 +142,10 @@ public class InternalFrame extends JInternalFrame implements UpdateListener,Adju
 	
     public void startResizeState(){
     	stateManager.setResizeState();
+    }
+    
+    public void startMoveState() {
+    	stateManager.setMoveState();
     }
 	// ----
 	
@@ -324,7 +366,7 @@ public class InternalFrame extends JInternalFrame implements UpdateListener,Adju
 	
 	
 	
-	private void setupTransformation() {
+	public void setupTransformation() {
 		
 		transformation.setToIdentity();
 		// Zumiranje
@@ -348,8 +390,12 @@ public class InternalFrame extends JInternalFrame implements UpdateListener,Adju
 			
 			Iterator<DiagramElement> it = diagram.getModel().getDeviceIterator();
 			while(it.hasNext()){
+				
 				DiagramElement element = it.next();
+				
 				ElementPainter painter =  element.getPainter();
+				
+				
 				painter.paint(g2, element);
 				
 			}
@@ -392,29 +438,7 @@ public class InternalFrame extends JInternalFrame implements UpdateListener,Adju
 			
 			
 			}else {
-				//isrtavanje handlova za link
-				/*LinkElement link=(LinkElement)element;
-			
-
-				Point2D bp=null;
-				bp=link.getOutput().getPosition();
-				g2.setPaint(Color.BLACK);
-				g2.setStroke(new BasicStroke((float)2, BasicStroke.CAP_SQUARE, 
-							BasicStroke.JOIN_BEVEL));
-				
-				g2.drawRect((int)bp.getX()-handleSize/2, (int)bp.getY()-handleSize/2,
-						handleSize, handleSize);
 	
-				Iterator<Point2D> itp = link.getPointsIterator();
-				while(itp.hasNext()){
-					bp = (Point2D) itp.next();
-					g2.drawRect((int)bp.getX()-handleSize/2, (int)bp.getY()-handleSize/2,
-							handleSize, handleSize);
-				
-				}
-				bp=link.getInput().getPosition();
-				g2.drawRect((int)bp.getX()-handleSize/2, (int)bp.getY()-handleSize/2,
-						handleSize, handleSize);*/
 			}
 
 		}

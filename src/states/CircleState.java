@@ -1,7 +1,5 @@
 package states;
 
-import elements.CircleElement;
-import elements.DiagramDevice;
 import gui.Frame;
 import gui.InternalFrame;
 
@@ -13,7 +11,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 
-import tree.Diagram;
+import commands.AddDeviceCommand;
 
 public class CircleState extends State{
 	private InternalFrame med; 
@@ -48,10 +46,8 @@ public class CircleState extends State{
 		Point position = e.getPoint();
 		med. transformToUserSpace(position);
 		if (e.getButton()==MouseEvent.BUTTON1){
-			 if (med.getDiagram().getModel().getDeviceAtPosition(position)==-1){
-				 DiagramDevice device = CircleElement.createDefault(position,med.getDiagram().getModel().getDeviceCount());
-				 med.getDiagram().getModel().addDiagramElements(device);
-				// System.out.println(((InternalFrame)Frame.getInstance().getDesk().getSelectedFrame()).getName());
+			if (med.getDiagram().getModel().getElementAtPosition(position)==-1){
+				 med.getCommandManager().addCommand(new AddDeviceCommand(med.getDiagram().getModel(),med.getDiagram().getSelectionModel(),position,InternalFrame.CIRCLE));
 			 }
 			
 			

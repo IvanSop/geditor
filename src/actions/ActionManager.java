@@ -26,7 +26,8 @@ public class ActionManager  {
 	private ZoomToBestFitAction zoomToBestFitAction = new ZoomToBestFitAction();
 	private DeleteAction deleteAction = new DeleteAction();
 	private TrashAction trashAction = new TrashAction();
-	
+	private Rotate90ClockwiseAction rotate90ClockwiseAction = new Rotate90ClockwiseAction();
+	private Rotate90CounterClockwiseAction rotate90CounterClockwiseAction  = new Rotate90CounterClockwiseAction();
 	
 	private PutRect putRect = new PutRect();
 	private PutCircle putCircle = new PutCircle();
@@ -142,6 +143,14 @@ public class ActionManager  {
 
 	public PutStar getPutStar() {
 		return putStar;
+	}
+
+	public Rotate90ClockwiseAction getRotate90ClockwiseAction() {
+		return rotate90ClockwiseAction;
+	}
+
+	public Rotate90CounterClockwiseAction getRotate90CounterClockwiseAction() {
+		return rotate90CounterClockwiseAction;
 	}
 
 	

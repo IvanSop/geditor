@@ -1,5 +1,8 @@
 package states;
 
+import gui.Frame;
+import gui.InternalFrame;
+
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Point;
@@ -8,11 +11,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 
-import tree.Diagram;
-import elements.DiagramDevice;
-import elements.RectangleElement;
-import gui.Frame;
-import gui.InternalFrame;
+import commands.AddDeviceCommand;
 
 public class RectangleState extends State{
 	private InternalFrame med; 
@@ -49,9 +48,9 @@ public class RectangleState extends State{
 		med. transformToUserSpace(position);
 		//((InternalFrame)Frame.getInstance().getDesk().getSelectedFrame()).getFramework().setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 		if (e.getButton()==MouseEvent.BUTTON1){
-			 if (med.getDiagram().getModel().getDeviceAtPosition(position)==-1){
-				 DiagramDevice device = RectangleElement.createDefault(position,med.getDiagram().getModel().getDeviceCount());
-				 med.getDiagram().getModel().addDiagramElements(device);
+			 if (med.getDiagram().getModel().getElementAtPosition(position)==-1){
+				 med.getCommandManager().addCommand(new AddDeviceCommand(med.getDiagram().getModel(),med.getDiagram().getSelectionModel(),position,InternalFrame.RECTANGLE));
+				 
 			 }
 		}
 	}

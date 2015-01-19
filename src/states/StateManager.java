@@ -16,6 +16,7 @@ public class StateManager implements Serializable {
 	StarState starState;
 	LassoState lassoState;
 	ResizeState resizeState;
+	MoveState moveState;
 	public StateManager(InternalFrame med)
 	{
 		 
@@ -26,6 +27,7 @@ public class StateManager implements Serializable {
 		starState=new StarState(med);
 		lassoState =new LassoState(med);
 		resizeState= new ResizeState(med);
+		moveState = new MoveState(med);
      	currentState = selectState;
 	}
 	
@@ -36,6 +38,7 @@ public class StateManager implements Serializable {
 	public void setStarState() { currentState = starState; Frame.getInstance().getStatusBar().setState("Star"); }
 	public void setLassoState() { currentState = lassoState; Frame.getInstance().getStatusBar().setState("Lasso"); }
 	public void setResizeState() { currentState = resizeState; Frame.getInstance().getStatusBar().setState("Resize"); }
+	public void setMoveState() { currentState = moveState; Frame.getInstance().getStatusBar().setState("Move"); }
 	public State getCurrentState() {
 		return currentState;
 	}
@@ -94,6 +97,14 @@ public class StateManager implements Serializable {
 
 	public void setResizeState(ResizeState resizeState) {
 		this.resizeState = resizeState;
+	}
+
+	public MoveState getMoveState() {
+		return moveState;
+	}
+
+	public void setMoveState(MoveState moveState) {
+		this.moveState = moveState;
 	}
 	
 	

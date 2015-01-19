@@ -96,6 +96,10 @@ public class Menu extends JMenuBar {
 		
 		edit.add(ActionManager.getAction().getUndoAction());
 		edit.add(ActionManager.getAction().getRedoAction());
+		
+		edit.add(ActionManager.getAction().getRotate90CounterClockwiseAction());
+		edit.add(ActionManager.getAction().getRotate90ClockwiseAction());
+		
 		edit.add(ActionManager.getAction().getTrashAction());
 		edit.addSeparator();
 		edit.add(ActionManager.getAction().getDeleteAction());
