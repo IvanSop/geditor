@@ -1,5 +1,6 @@
 package actions;
 
+import elements.DiagramDevice;
 import elements.DiagramElement;
 import gui.Frame;
 import gui.InternalFrame;
@@ -10,6 +11,8 @@ import java.util.Iterator;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
+
+import commands.DeleteElementCommand;
 
 public class TrashAction extends AbstractAction {
 	public TrashAction() {
@@ -33,6 +36,7 @@ public void actionPerformed(ActionEvent e) {
 				Iterator<DiagramElement > it=view.getDiagram().getSelectionModel().getSelectionListIterator();
 				while (it.hasNext()){
 					DiagramElement element=it.next();
+					DiagramDevice dev = (DiagramDevice)element;
 					view.getDiagram().getModel().removeElement(element);
 					
 				}

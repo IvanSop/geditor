@@ -151,7 +151,7 @@ public class DiagramModel implements Serializable {
 	             if (updateEvent == null)
 	                 updateEvent = new UpdateEvent(this);
 	             ((UpdateListener)listeners[i+1]).updatePerformed(updateEvent);
-	             System.out.println("jebo sebe sliku svoju");
+	            
 	             
 	         }
 	     }

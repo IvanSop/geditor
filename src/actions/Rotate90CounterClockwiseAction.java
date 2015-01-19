@@ -13,6 +13,8 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
+import commands.RotateCommand;
+
 public class Rotate90CounterClockwiseAction extends AbstractAction {
 
 	public Rotate90CounterClockwiseAction() {
@@ -35,13 +37,13 @@ public class Rotate90CounterClockwiseAction extends AbstractAction {
     	
     	DiagramDevice dev = null;
 		if(med.getDiagram().getSelectionModel().getSelectionListSize()==1) {
-			dev = (DiagramDevice)((InternalFrame)Frame.getInstance().getDesk().getSelectedFrame()).getDiagram().getSelectionModel().getSelectionList().get(0);
+			//dev = (DiagramDevice)((InternalFrame)Frame.getInstance().getDesk().getSelectedFrame()).getDiagram().getSelectionModel().getSelectionList().get(0);
     	
     				
-			DiagramElement element = dev;
-			
-			DiagramDevice device=(DiagramDevice) element;
-			device.setRotation(device.getRotation()-Math.PI/2);
+			//DiagramElement element = dev;
+			med.getCommandManager().addCommand(new RotateCommand(med.getDiagram().getModel(), med.getDiagram().getSelectionModel(), -1));
+			//DiagramDevice device=(DiagramDevice) element;
+			//device.setRotation(device.getRotation()-Math.PI/2);
 			
 		} else {
 			return;
