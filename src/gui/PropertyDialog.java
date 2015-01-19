@@ -49,6 +49,8 @@ public class PropertyDialog extends JDialog implements ActionListener {
 	namef.setText(((InternalFrame)Frame.getInstance().getDesk().getSelectedFrame()).getDiagram().getSelectionModel().getSelectionList().get(0).getName());
 	namef.selectAll();
 	//JColorChooser cc = new JColorChooser();
+	DiagramDevice tempdevice = (DiagramDevice)((InternalFrame)Frame.getInstance().getDesk().getSelectedFrame()).getDiagram().getSelectionModel().getSelectionList().get(0);
+	cc.setColor((Color)tempdevice.getPaint());
 	ta = new JTextArea();
 	ta.setPreferredSize(new Dimension(500,120));
 	

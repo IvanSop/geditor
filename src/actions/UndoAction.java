@@ -26,6 +26,7 @@ public class UndoAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         System.out.println("Action [" + e.getActionCommand() + "] performed!");
     	InternalFrame view=(InternalFrame) Frame.getInstance().getDesk().getSelectedFrame();
-		view.getCommandManager().undoCommand();
+		if (view == null) return;
+    	view.getCommandManager().undoCommand();
     }
 }
